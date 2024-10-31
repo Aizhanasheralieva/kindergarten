@@ -1,41 +1,47 @@
-import {useParams} from "react-router-dom";
-import {IPage} from "../../types";
-import {useCallback, useEffect, useState} from "react";
-import axiosAPI from "../../../axiosAPI.ts";
-
+import { useParams } from "react-router-dom";
+import { IPage } from "../../types";
+import { useCallback, useEffect, useState } from "react";
+import axiosApi from "../../../axiosAPI.ts";
 
 const SummaryPage = () => {
-    const { pageTitle} = useParams<{ pageTitle: string }>();
-    const [pageContent, setPageContent] = useState<IPage>({
-        title: '',
-        content: '',
-    });
-
-        const fetchDataAboutPage = useCallback(async () => {
-            try {
-                const response =  await axiosAPI(`${pageTitle}/about`);
-                if (response.data) {
-                    setPageContent(response.data);
-                }
-                console.log(response.data);
-            } catch (error) {
-                console.log(error);
-            }
-        }, [pageTitle]);
-
-    useEffect(() => {
-        if (pageTitle) {
-          void fetchDataAboutPage();
-        }
-    }, [fetchDataAboutPage, pageTitle]);
+  const { id } = useParams<{id: string}>();
+  console.log(id);
 
 
-    return (
-        <div className="container mt-4">
-            <h1>{pageContent.title}</h1>
-            <p>{pageContent.content}</p>
-        </div>
-    );
+  const [pageContent, setPageContent] = useState<IPage>({
+    title: "",
+    content: "",
+  });
+
+
+  const fetchDataAboutOnePage = useCallback(async () => {
+    try {
+      const response = await axiosApi.get(`/pages/${id}.json`);
+      if (response.data) {
+        setPageContent(response.data);
+      }
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [id]);
+
+  console.log("Fetching page with ID:", id);
+
+
+
+  useEffect(() => {
+    if (id) {
+      void fetchDataAboutOnePage();
+    }
+  }, [fetchDataAboutOnePage, id]);
+
+  return (
+    <div className="container mt-4">
+      <h1>{pageContent.title}</h1>
+      <p>{pageContent.content}</p>
+    </div>
+  );
 };
 
 export default SummaryPage;

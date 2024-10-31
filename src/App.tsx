@@ -1,7 +1,8 @@
 import Toolbar from "./components/Toolbar/Toolbar.tsx";
-import {Route, Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import SummaryPage from "./components/SummaryPage/SummaryPage.tsx";
-import Admin from "./components/Admin/Admin.tsx";
+import Admin from "./containers/Admin/Admin.tsx";
+import EditPageContainer from "./containers/EditPageContainer/EditPageContainer.tsx";
 
 const App = () => {
   return (
@@ -10,14 +11,15 @@ const App = () => {
         <Toolbar />
       </header>
       <main className="container mt-4">
-          <div className="row">
-              <Routes>
-                  <Route path="/"  element={ <SummaryPage/>} />
-                  <Route path="/admin" element={ <Admin />} />
-                  <Route path="/pages/:id" element={ <SummaryPage/> } />
-                  <Route path="*" element={<h3>Page not found</h3>} />
-              </Routes>
-          </div>
+        <div className="row">
+          <Routes>
+            <Route path="/home" element={<SummaryPage />} />
+            <Route path="/pages/admin" element={<Admin />} />
+            <Route path="/pages/:id" element={<SummaryPage />} />
+            <Route path="/pages/:pageId/edit" element={<EditPageContainer />} />
+            <Route path="*" element={<h3>Page not found</h3>} />
+          </Routes>
+        </div>
       </main>
     </>
   );
