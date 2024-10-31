@@ -14,12 +14,27 @@ const Toolbar = () => {
             <ul className="navbar-nav">
               <li className="nav-item">
                 <NavLink className="nav-link text-white" to="/">
-                  Home
+                  About IMS
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link text-white" to="/about">
-                  About us
+                <NavLink className="nav-link text-white" to="/aboutMontessori">
+                  Montessori
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link text-white" to="/materials">
+                  Materials
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link text-white" to="/families">
+                  Families
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link text-white" to="/research">
+                  Research
                 </NavLink>
               </li>
               <li className="nav-item">
